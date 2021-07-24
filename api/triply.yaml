@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Triply Planning Service
+  description: Triply Planning Service
+  version: 0.0.1
+servers:
+  - url: 'https://localhost/api/v1'
+paths:
+  /vendors/{vendor_id}:
+    parameters:
+      - name: vendor_id
+        in: path
+        required: true
+        description: the vendor identifier
+        schema:
+          type: string
+    get:
+      responses:
+        200:
+          description: a specific vendor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vendor"
+  /activities:
+    get:
+      responses:
+        200:
+          description: a list of activities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activities"
+components:
+  schemas:
+    Activities:
+      type: array
+      items:
+        $ref: "#/components/schemas/Activity"
+    Activity:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/ActivityType"
+        description:
+          type: string
+          description: a brief description of the activity
+        parent:
+          type: string
+          description: the parent of the activity category
+    Address:
+      type: object
+      required:
+        - street
+        - city
+        - state
+        - zip
+        - country
+      properties:
+        street:
+          type: string
+          description: the street number including house number and street name
+        city:
+          type: string
+          description: the name of the city
+        state:
+          type: string
+          description: the state or territory
+        zip:
+          type: string
+          description: zip code
+        country:
+          type: string
+          description: the country name
+    ActivityType:
+      type: string
+      enum:
+        - meal
+        - tasting
+        - sightsee
+    VendorType:
+      type: string
+      enum:
+        - restaurant
+        - public house
+        - sightsee
+    Vendor:
+      type: object
+      required:
+        - id
+        - name
+        - address
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/VendorType"
+        address:
+          $ref: Address
+        web:
+          type: string
+          description: web site URL
+        hourse:
+          $ref: Hours
