@@ -15,6 +15,7 @@ paths:
         schema:
           type: string
     get:
+      operationId: getVendor
       responses:
         200:
           description: a specific vendor
@@ -24,6 +25,7 @@ paths:
                 $ref: "#/components/schemas/Vendor"
   /activities:
     get:
+      operationId: getActivities
       responses:
         200:
           description: a list of activities
@@ -86,6 +88,8 @@ components:
         - meal
         - tasting
         - sightsee
+    Hours:
+      type: object
     VendorType:
       type: string
       enum:
@@ -107,9 +111,9 @@ components:
         type:
           $ref: "#/components/schemas/VendorType"
         address:
-          $ref: Address
+          $ref: "#/components/schemas/Address"
         web:
           type: string
           description: web site URL
-        hourse:
-          $ref: Hours
+        hours:
+          $ref: "#/components/schemas/Hours"
