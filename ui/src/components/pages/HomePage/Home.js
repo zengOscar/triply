@@ -1,12 +1,13 @@
 import React from 'react'
-import HeroSection from '../../HeroSection'
+import HomeBackground from '../../HomeBackground'
+import ImageSlider from '../../ImageSlider'
+import { SliderData } from '../../SliderData'
 import {homeObjOne} from './Data'
 
 function Home() {
     return (
         <>
-            <HeroSection {...homeObjOne} />
-            <HeroSection {...homeObjOne} />
+            <ImageSlider slides={SliderData}/>
         </>
     )
 }
